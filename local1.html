@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head> 
+<title> Todo Tracker </title>
+</head>
+<body>
+<h1> Todo Tracker </h1>
+<form>
+<input type="text" id="user-todo" placeholder="new todo" required>
+</form>
+<h2 id = "header">Todos </h2>
+<ul> 
+
+ </ul>   
+<button id="Clear">Clear all</button>
+<script>
+var form = document.querySelector('form');
+var todoList = document.querySelector('ul'); 
+var button = document.querySelector('button');
+var input = document.getElementById('user-todo');
+    
+    //var todosArray= [];
+    
+    var todosArray = localStorage.getItem('todos') ?JSON.parse(localStorage.getItem('todos')) : [];
+    localStorage.setItem('todos',JSON.stringify(todosArray));
+    var storage = JSON.parse(localStorage.getItem('todos'))
+    
+    
+    form.addEventListener('submit',function(e) {
+        e.preventDefault();
+        todosArray.push(input.value);
+        localStorage.setItem('todos', JSON.stringify(todosArray)) ;
+        todoMaker(input.value);
+        input.value = "";
+    });
+    
+    var todoMaker = function(text) {
+        var todo= document.createElement('li');
+        todo.textContent = text;
+        todoList.appendChild(todo);
+    }
+    for (i =0; i < storage.length; i++) {
+        todoMaker(storage[i]);
+    }
+    button.addEventListener('Click',function() {
+        localStorage.clear();
+    while (todoList.firstChild) {
+    todoList.removeChild(todoList.firstChild);
+    }
+    });
+
+</script>
+</body>
+</html>

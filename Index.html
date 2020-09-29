@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head> 
+<title> Todo Tracker </title>
+</head>
+<body>
+<h1> Todo Tracker </h1>
+<form>
+<input type="text" id="user-todo" placeholder="new todo" required>
+</form>
+<h2 id = "header">Todos </h2>
+<ul>
+
+ </ul>   
+<button id="Clear">Clear all</button>
+</body>
+<script>
+    var form = document.querySelector('form');
+    var todoList = document.querySelector('ul');
+    var button = document.querySelector('button');
+    var input = document.getElementById('user-todo');
+    
+    form.addEventListener('submit',function(e)) {
+        e.preventDefault();
+        todoMaker(input.value) 
+            input.value = "";
+    });
+    var todoMaker = function(text) {
+        var todo= document.createElement('li');
+        todo.textContent = text;
+        todoList.appendChild(todo);
+    }
+    button.addEventListener('click',function() {
+    while (todoList.firstChild) {
+    todoList.removeChild(todoList.firstChild);
+    }
+    });
+    
+</script>
+</html>
